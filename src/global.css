@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  @apply font-["Roboto","Poppins","sans-serif"] scroll-smooth ;
+}
+.logoMain{
+  text-shadow: -0.08em 0.03em 0.12em rgba(0,0,0,0.9);
+}
+.frameStage-container:last-child{
+  @apply border-none;
+}
+.frameCard-container::-webkit-scrollbar,.board-container::-webkit-scrollbar { 
+    display: none !important;  
+}
+.frameStage-container h1{
+  @apply font-["Poppins","sans-serif"] text-xl text-zinc-700 font-bold mt-6;
+}
+
+.low-bgPriority{
+  @apply bg-[#00a8ff];
+}
+.medium-bgPriority{
+  @apply bg-orange-500;
+}
+.high-bgPriority{
+  @apply bg-red-500;
+}
