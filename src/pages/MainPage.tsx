@@ -1,13 +1,10 @@
-import React from 'react'
-import { Plus, SignOut } from 'phosphor-react'
-import { Link } from 'react-router-dom'
-import FrameCardModal from '../components/BoardCardModal'
-import Board from '../components/Board'
-import useCardContext from '../hooks/useCardContext'
 import axios from 'axios'
+import { Plus, SignOut } from 'phosphor-react'
 import { useEffect } from 'react'
-import { axiosTasks } from '../helpers/axios'
-import { Api } from '../types/api'
+import { Link } from 'react-router-dom'
+import Board from '../components/Board'
+import FrameCardModal from '../components/BoardCardModal'
+import useCardContext from '../hooks/useCardContext'
 
 export default function MainPage() {
   const {
@@ -28,7 +25,6 @@ export default function MainPage() {
     })
 
   }
-
   useEffect(() => {
     fetchTasks()
   }, [])

@@ -1,70 +1,41 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import useToken from './useToken'
+import { Api, UserLogin } from '../types/api'
 
-type props = {
-  route: "login" | "register" | "tasks",
-  method: "get" | "post" | "put" | "delete",
-  payload?: any,
-}
-export default function useAxios({ route, method, payload }: props) {
+export default function useAxios() {
+  const { setTokenToLocalStorage, getTokenFromLocalStore } = useToken()
   const [isRequestOkay, setIsRequestOkay] = useState(false)
-  const [data, setData] = useState()
-  const { setTokenToSessionStorage } = useToken()
-  const token = sessionStorage.getItem('token')
-  if (!token) {
-    setIsRequestOkay(false)
+  let response: any
+
+  async function axiosLogin(route: string, payload: UserLogin) {
+    response = await axios.post(`${import.meta.env.VITE_API_URL}/${route}`, payload, {})
+    if (response.status === 200) setTokenToLocalStorage(response.data.token)
+    return response
+  }
+  async function axiosRegister(route: string, payload: UserLogin) {
+    return await axios.post(`${import.meta.env.VITE_API_URL}/${route}`, payload, {})
   }
 
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': token || ''
-  }
-  function Login() {
-    axios.post(`http://localhost:3001/${route}`, payload, {}).then(res => {
-      setTokenToSessionStorage(res.data.token)
-      setIsRequestOkay(true)
-    }).catch(err => {
-      setIsRequestOkay(false)
-    })
-  }
-  function register() {
-    axios.post(`http://localhost:3001/${route}`, payload, {}).then(res => {
-      setIsRequestOkay(true)
-    }).catch(err => {
-      setIsRequestOkay(false)
-    })
-  }
-  function Tasks() {
-    if (route === "tasks" && (method === "get" || method === "delete")) {
-      (method === "get") ?
-        axios.get(`http://localhost:3001/${route}`).then(res => {
-          setData(res.data)
-          setIsRequestOkay(true)
-        }).catch(err => {
-          setIsRequestOkay(false)
-        }) :
-        axios.delete(`http://localhost:3001/${route}/${payload.id}`).then(res => {
-          setIsRequestOkay(true)
-        }).catch(err => {
-          setIsRequestOkay(false)
-        })
+  async function axiosTasks(method: string, route: string, payload?: Api) {
+    if (!getTokenFromLocalStore) return false
+    const headers = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Authorization": getTokenFromLocalStore
     }
-    if (route === "tasks" && (method === "post" || method === "put")) {
+    if (method === "delete") {
+      response = await axios.delete(`${import.meta.env.VITE_API_URL}/${route}/${payload!.id}`)
+      return response
+    }
+    if (method === "post" || method === "patch") {
       (method === "post") ?
-        axios.post(`http://localhost:3001/${route}`, payload, { headers: headers }).then(res => {
-          setIsRequestOkay(true)
-        }).catch(err => {
-          setIsRequestOkay(false)
-        }) :
-        axios.put(`http://localhost:3001/${route}/${payload.id}`, payload, { headers: headers }).then(res => {
-          setIsRequestOkay(true)
-        }).catch(err => {
-          setIsRequestOkay(false)
-        })
+        response = await axios.post(`${import.meta.env.VITE_API_URL}/${route}`, payload, { headers })
+        :
+        response = await axios.patch(`${import.meta.env.VITE_API_URL}/${route}/${payload!.id}`, payload, { headers })
+      return response
     }
-
   }
 
-  return { Login, Tasks,register }
+  return { axiosLogin, axiosTasks, axiosRegister }
 }

@@ -6,20 +6,24 @@ export enum TaskStatus {
   TESTS = 'tests',
   Paused = 'paused',
 }
-export enum Priority{
+export enum Priority {
   LOW = 'low',
   MEDIUM = 'medium',
   HIGH = 'high',
 }
+export type UserLogin = {
+  email: string,
+  password: string,
+}
 export type Api = {
-  id?:string
+  id?: string
   title: string;
   description: string;
   createdAt: Date;
   status: TaskStatus;
   members: string[];
   createdBy: string;
-  priority:Priority;
+  priority: Priority;
 }
 export type StatusBoard = {
   [TaskStatus.TO_DO]: Api[];

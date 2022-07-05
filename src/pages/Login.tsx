@@ -1,17 +1,21 @@
-import axios from 'axios'
-import React, { FormEvent, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { axiosLogin } from '../helpers/axios'
-import useToken from '../hooks/useToken'
+import { FormEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import useAxios from '../hooks/useAxios'
 
 export default function Login() {
   const [login, setLogin] = useState({ email: '', password: '' })
   const navegate = useNavigate()
-
+  const { axiosLogin } = useAxios()
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const response = axiosLogin(login)
-    !response ? alert('Login failed') : navegate('/project')
+    try {
+      const response = await axiosLogin('login', login)
+      response.data && navegate('/project')
+
+    } catch (error) {
+      alert('login error')
+    }
+
   }
   return (
     <div className='box-border flex overflow-hidden'>

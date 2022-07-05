@@ -1,5 +1,4 @@
-import axios from 'axios'
-import React from 'react'
+import useAxios from '../hooks/useAxios'
 import useCardContext from '../hooks/useCardContext'
 import { Api } from '../types/api'
 
@@ -14,7 +13,7 @@ export default function ModalButtonsContainer(cardData: { data: Partial<Api> }) 
     setTasks,
     tasks } = useCardContext()
   const newCard = cardData.data as Api
-
+  const { axiosTasks } = useAxios()
   function handleButtonName() {
     if (isCardAdd) {
       return 'Adicionar'
@@ -33,31 +32,15 @@ export default function ModalButtonsContainer(cardData: { data: Partial<Api> }) 
     return 'bg-red-500  hover:bg-red-700'
   }
 
-
-  function patchEditedCard() {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'JWT fefege...'
-    }
-
-    axios.patch('http://localhost:3001/tasks/id ', modalCardInfos, {
-      headers: headers
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
-
   function handleAddButton() {
+    axiosTasks("post", "tasks", newCard)
     setTasks([...tasks, newCard])
     setIsCardAdd(false)
     setIsModalOpen(false)
   }
 
   function handleEditButton() {
+    axiosTasks("path", 'tasks', modalCardInfos)
     modalCardInfos.title = newCard.title!
     modalCardInfos.description = newCard.description!
     modalCardInfos.priority = newCard.priority!

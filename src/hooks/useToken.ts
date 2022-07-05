@@ -1,17 +1,17 @@
 import React from 'react'
 
 export default function useToken() {
-  const getTokenFromSessionStore = sessionStorage.getItem('token')
-  function removeTokenOfSessionStorage() {
-    sessionStorage.removeItem('token')
+  const getTokenFromLocalStore = localStorage.getItem('token')
+  function removeTokenOfLocalStorage() {
+    localStorage.removeItem('token')
   }
-  function setTokenToSessionStorage(token: string) {
-    sessionStorage.setItem('token', token)
+  function setTokenToLocalStorage(token: string) {
+    localStorage.setItem('token', token)
   }
   return {
-    getTokenFromSessionStore,
-    removeTokenOfSessionStorage,
-    setTokenToSessionStorage
+    getTokenFromLocalStore,
+    removeTokenOfLocalStorage,
+    setTokenToLocalStorage
   }
 
 }
