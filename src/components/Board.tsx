@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import useCardContext from "../hooks/useCardContext";
 import { Api, StatusBoard } from "../types/api";
-import FrameCard from "./BoardCard";
-import FrameStageColum from "./BoardColum";
+import BoardColum from "./BoardColum";
 
 const INITIAL_STATE_STATUS_BOARD_OBJ = {
   toDo: [],
@@ -27,17 +26,17 @@ export default function Board(props: { data: Api[] }) {
     })
   }
   useEffect(() => {
-    if (props.data.length !== statusBoard.taskArrayLength || isCardEdit) {
+    if (props.data.length !== statusBoard.taskArrayLength ) {
       handleSetStatusBoard()
     }
 
   }, [props.data, statusBoard,isCardEdit])
 
   return (<>
-    <FrameStageColum CardsArrayFiltred={statusBoard.toDo} />
-    <FrameStageColum CardsArrayFiltred={statusBoard.inProgress} />
-    <FrameStageColum CardsArrayFiltred={statusBoard.tests} />
-    <FrameStageColum CardsArrayFiltred={statusBoard.review} />
-    <FrameStageColum CardsArrayFiltred={statusBoard.done} />
+    <BoardColum CardsArrayFiltred={statusBoard.toDo} />
+    <BoardColum CardsArrayFiltred={statusBoard.inProgress} />
+    <BoardColum CardsArrayFiltred={statusBoard.tests} />
+    <BoardColum CardsArrayFiltred={statusBoard.review} />
+    <BoardColum CardsArrayFiltred={statusBoard.done} />
   </>)
 }

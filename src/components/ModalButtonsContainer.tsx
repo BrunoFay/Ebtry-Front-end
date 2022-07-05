@@ -33,22 +33,7 @@ export default function ModalButtonsContainer(cardData: { data: Partial<Api> }) 
     return 'bg-red-500  hover:bg-red-700'
   }
 
-  function postNewCard() {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'JWT fefege...'
-    }
 
-    axios.post('http://localhost:3001/tasks ', newCard, {
-      headers: headers
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
   function patchEditedCard() {
     const headers = {
       'Content-Type': 'application/json',

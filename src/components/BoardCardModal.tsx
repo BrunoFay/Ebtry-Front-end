@@ -10,7 +10,7 @@ export default function BoardCardModal() {
   const { createdAt,
     createdBy,
     description,
-    members,
+    members=[],
     priority,
     status,
     title } = modalCardInfos

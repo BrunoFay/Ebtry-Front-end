@@ -18,7 +18,7 @@ export default function RightModalContainer(infos: RightModalProps) {
         )}
       </RightModalContainerInfos>
       <RightModalContainerInfos title='Data'>
-        {createdAt.toDateString()}
+        {new Date(createdAt).toDateString()}
       </RightModalContainerInfos>
       <RightModalContainerInfos title='Responsavel'>
         {createdBy}

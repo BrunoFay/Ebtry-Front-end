@@ -6,29 +6,32 @@ import Board from '../components/Board'
 import useCardContext from '../hooks/useCardContext'
 import axios from 'axios'
 import { useEffect } from 'react'
+import { axiosTasks } from '../helpers/axios'
+import { Api } from '../types/api'
 
 export default function MainPage() {
   const {
     isModalOpen,
     setIsCardAdd,
+    setIsCardEdit,
     isCardAdd,
     isCardEdit,
     tasks,
     setTasks,
     setIsModalOpen } = useCardContext()
 
-  async function fetchTasks() {
-    try {
-      const response = await axios.get('http://localhost:3001/tasks')
-      setTasks(response.data)
-    } catch (error) {
-      console.log(error);
-    }
+  function fetchTasks() {
+    axios.get(`http://localhost:3001/tasks`).then(res => {
+      setTasks(res.data)
+    }).catch(err => {
+      alert('error Fetch')
+    })
+
   }
+
   useEffect(() => {
     fetchTasks()
   }, [])
-  
   function handleClick() {
     setIsCardAdd(!isCardAdd)
     setIsModalOpen(!isModalOpen)
