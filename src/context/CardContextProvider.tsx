@@ -16,7 +16,7 @@ export default function CardContextProvider(props: { children: ReactNode }) {
   const [modalCardInfos, setModalCardInfos] = useState<Api>(INITIAL_STATE_CARD)
   const [isCardEdit, setIsCardEdit] = useState(false)
   const [isCardAdd, setIsCardAdd] = useState(false)
-  const [apiData, setApiData] = useState<Api[]>([]);
+  const [tasks, setTasks] = useState<Api[]>([]);
   const valueToProvider = {
     isModalOpen,
     setIsModalOpen,
@@ -26,8 +26,8 @@ export default function CardContextProvider(props: { children: ReactNode }) {
     setIsCardEdit,
     isCardAdd,
     setIsCardAdd,
-    apiData,
-    setApiData,
+    tasks,
+    setTasks,
   }
   return (
     <cardContext.Provider value={valueToProvider} >

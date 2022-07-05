@@ -13,21 +13,22 @@ export default function MainPage() {
     setIsCardAdd,
     isCardAdd,
     isCardEdit,
-    apiData,
-    setApiData,
+    tasks,
+    setTasks,
     setIsModalOpen } = useCardContext()
 
   async function fetchTasks() {
     try {
       const response = await axios.get('http://localhost:3001/tasks')
-      setApiData(response.data)
+      setTasks(response.data)
     } catch (error) {
       console.log(error);
     }
   }
   useEffect(() => {
     fetchTasks()
-  })
+  }, [])
+  
   function handleClick() {
     setIsCardAdd(!isCardAdd)
     setIsModalOpen(!isModalOpen)
@@ -69,7 +70,7 @@ export default function MainPage() {
 
         </div>
         <div className='board-container border-2 bg-transparent bg-no-repeat bg-cover border-green-300 gap-2 rounded py-2 overflow-auto  flex justify-around w-[90vw] h-[32em]'>
-          <Board data={apiData} />
+          <Board data={tasks} />
         </div>
         {isModalOpen && <FrameCardModal />}
       </main>

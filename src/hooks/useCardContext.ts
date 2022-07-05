@@ -11,8 +11,8 @@ export default function useCardContext() {
     setIsCardAdd,
     isCardEdit,
     setIsCardEdit,
-    apiData,
-    setApiData } = useContext(cardContext) as CardContex
+    tasks,
+    setTasks } = useContext(cardContext) as CardContex
   return {
     isModalOpen,
     setIsModalOpen,
@@ -22,7 +22,7 @@ export default function useCardContext() {
     setIsCardAdd,
     isCardEdit,
     setIsCardEdit,
-    apiData,
-    setApiData
+    tasks,
+    setTasks
   }
 }

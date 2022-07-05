@@ -15,7 +15,6 @@ export default function BoardCardModal() {
     status,
     title } = modalCardInfos
   const [cardToAdd, setCardToAdd] = useState(INITIAL_STATE_NEW_CARD)
-  console.log(cardToAdd,modalCardInfos);
   
   const [cardUpdate, setCardUpdate] = useState({
     title,

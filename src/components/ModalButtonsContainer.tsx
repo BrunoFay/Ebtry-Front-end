@@ -11,8 +11,8 @@ export default function ModalButtonsContainer(cardData: { data: Partial<Api> }) 
     modalCardInfos,
     setIsCardEdit,
     setIsCardAdd,
-    setApiData,
-    apiData } = useCardContext()
+    setTasks,
+    tasks } = useCardContext()
   const newCard = cardData.data as Api
 
   function handleButtonName() {
@@ -67,7 +67,7 @@ export default function ModalButtonsContainer(cardData: { data: Partial<Api> }) 
   }
 
   function handleAddButton() {
-    setApiData([...apiData, newCard])
+    setTasks([...tasks, newCard])
     setIsCardAdd(false)
     setIsModalOpen(false)
   }

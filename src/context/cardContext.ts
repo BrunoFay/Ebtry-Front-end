@@ -10,7 +10,7 @@ export type CardContex = {
   setIsCardEdit: (isEdit: boolean) => void
   isCardAdd: boolean
   setIsCardAdd: (isAdd: boolean) => void
-  apiData: Api[]
-  setApiData: (data: Api[]) => void
+  tasks: Api[]
+  setTasks: (data: Api[]) => void
 }
 export const cardContext = createContext<CardContex | {}>({})
