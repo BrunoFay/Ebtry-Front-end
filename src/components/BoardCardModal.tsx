@@ -1,13 +1,23 @@
 import { useState } from 'react';
 
 import { INITIAL_STATE_CARD as INITIAL_STATE_NEW_CARD } from '../context/CardContextProvider';
+import useAxios from '../hooks/useAxios';
 import useCardContext from '../hooks/useCardContext';
+import { Api } from '../types/api';
 import ModalButtonsContainer from './ModalButtonsContainer';
 import ModalStatusContainer from './ModalStatusContainer';
 import RightModalContainer from './RightModalContainer';
 
 export default function BoardCardModal() {
-  const { modalCardInfos, isCardEdit, isCardAdd } = useCardContext();
+  const {
+    modalCardInfos,
+    isCardEdit,
+    isCardAdd,
+    setIsModalOpen,
+    isModalOpen,
+    setTasks,
+    tasks,
+  } = useCardContext();
   const {
     createdAt,
     createdBy,
@@ -25,7 +35,7 @@ export default function BoardCardModal() {
     priority,
     status,
   });
-
+  const { axiosTasks } = useAxios()
   function handleChange(e: any) {
     const { name, value } = e.target;
     isCardAdd
@@ -33,6 +43,12 @@ export default function BoardCardModal() {
       : setCardUpdate({ ...cardUpdate, [name]: value });
   }
 
+  async function handleDeleteCard() {
+    setTasks(tasks.filter((task) => task.id !== modalCardInfos.id));
+    const cardId = modalCardInfos.id as Partial<Api>;
+    await axiosTasks('delete', 'tasks', cardId)
+    setIsModalOpen(!isModalOpen);
+  }
   return (
     <div
       tabIndex={1}
@@ -73,6 +89,7 @@ export default function BoardCardModal() {
           createdAt={!isCardAdd ? createdAt : cardToAdd.createdAt}
           members={!isCardAdd ? members : cardToAdd.members}
           createdBy={!isCardAdd ? createdBy : cardToAdd.createdBy}
+          handleDeleteCard={handleDeleteCard}
         />
       </div>
       <ModalButtonsContainer

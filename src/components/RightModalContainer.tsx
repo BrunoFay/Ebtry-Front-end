@@ -8,11 +8,22 @@ type RightModalProps = {
   members: string[];
   createdAt: Date;
   createdBy: string;
+  handleDeleteCard: () => Promise<void>
 };
 
 export default function RightModalContainer(infos: RightModalProps) {
-  const { createdAt, members, createdBy } = infos;
-  const { setIsCardEdit, isCardEdit, isCardAdd } = useCardContext();
+  const {
+    createdAt,
+    members,
+    createdBy,
+    handleDeleteCard } = infos;
+  const {
+    setIsCardEdit,
+    isCardEdit,
+    isCardAdd,
+  } = useCardContext();
+
+
   return (
     <div className="flex items-center justify-evenly flex-col rounded ring-2 w-[9rem]  gap-5">
       <RightModalContainerInfos title="Membros">
@@ -31,7 +42,9 @@ export default function RightModalContainer(infos: RightModalProps) {
 
       {!isCardEdit && !isCardAdd && (
         <div className="flex gap-4">
-          <button className="ring-transparent outline-none ring-2 focus:ring-green-500 hover:ring-green-500 rounded p-1">
+          <button
+            onClick={handleDeleteCard}
+            className="ring-transparent outline-none ring-2 focus:ring-green-500 hover:ring-green-500 rounded p-1">
             <Trash size={25} />
           </button>
           <button

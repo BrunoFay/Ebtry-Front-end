@@ -26,7 +26,7 @@ export default function useAxios() {
     );
   }
 
-  async function axiosTasks(method: string, route: string, payload?: Api) {
+  async function axiosTasks(method: string, route: string, payload?: Partial<Api>) {
     if (!getTokenFromLocalStore) return false;
     const headers = {
       'Content-Type': 'application/json',
