@@ -2,16 +2,21 @@ import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useAxios from '../hooks/useAxios';
+import useUserContext from '../hooks/useUserContext';
 
 export default function Login() {
   const [login, setLogin] = useState({ email: '', password: '' });
   const navegate = useNavigate();
   const { axiosLogin } = useAxios();
+  const { setUserRole } = useUserContext();
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
       const response = await axiosLogin('login', login);
-      response.data && navegate('/project');
+      if (response.data) {
+        setUserRole(response.data.role);
+        navegate('/project');
+      }
     } catch (error) {
       alert('login error');
     }

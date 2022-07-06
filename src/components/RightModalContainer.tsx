@@ -2,6 +2,7 @@ import { Pen, Trash } from 'phosphor-react';
 import React from 'react';
 
 import useCardContext from '../hooks/useCardContext';
+import useUserContext from '../hooks/useUserContext';
 import RightModalContainerInfos from './RightModalContainerInfos';
 
 type RightModalProps = {
@@ -22,7 +23,7 @@ export default function RightModalContainer(infos: RightModalProps) {
     isCardEdit,
     isCardAdd,
   } = useCardContext();
-
+  const { userRole } = useUserContext();
 
   return (
     <div className="flex items-center justify-evenly flex-col rounded ring-2 w-[9rem]  gap-5">
@@ -40,13 +41,13 @@ export default function RightModalContainer(infos: RightModalProps) {
         {createdBy}
       </RightModalContainerInfos>
 
-      {!isCardEdit && !isCardAdd && (
+      {(!isCardEdit && !isCardAdd) && (
         <div className="flex gap-4">
-          <button
+          {(userRole === 'admin') && (<button
             onClick={handleDeleteCard}
             className="ring-transparent outline-none ring-2 focus:ring-green-500 hover:ring-green-500 rounded p-1">
             <Trash size={25} />
-          </button>
+          </button>)}
           <button
             onClick={() => setIsCardEdit(!isCardEdit)}
             className="ring-transparent outline-none ring-2 focus:ring-green-500 hover:ring-green-500 rounded p-1"

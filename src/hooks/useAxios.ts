@@ -39,7 +39,7 @@ export default function useAxios() {
       );
       return response;
     }
-    if (method === 'post' || method === 'patch') {
+    else if (method === 'post' || method === 'patch') {
       method === 'post'
         ? (response = await axios.post(
           `${import.meta.env.VITE_API_URL}/${route}`,
@@ -53,6 +53,11 @@ export default function useAxios() {
         ));
       return response;
     }
+    else {
+      response = await axios.get('http://localhost:3001/tasks')
+      return response.data;
+    }
+
   }
 
   return { axiosLogin, axiosTasks, axiosRegister };

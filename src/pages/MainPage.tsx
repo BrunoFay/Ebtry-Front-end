@@ -1,11 +1,12 @@
-import axios from 'axios';
 import { Plus, SignOut } from 'phosphor-react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Board from '../components/Board';
 import FrameCardModal from '../components/BoardCardModal';
+import useAxios from '../hooks/useAxios';
 import useCardContext from '../hooks/useCardContext';
+import useUserContext from '../hooks/useUserContext';
 
 export default function MainPage() {
   const {
@@ -17,17 +18,17 @@ export default function MainPage() {
     setTasks,
     setIsModalOpen,
   } = useCardContext();
-
-  function fetchTasks() {
-    axios
-      .get('http://localhost:3001/tasks')
-      .then((res) => {
-        setTasks(res.data);
-      })
-      .catch((err) => {
-        alert('error Fetch');
-      });
+  const { axiosTasks } = useAxios();
+  const { userRole } = useUserContext();
+  async function fetchTasks() {
+    try {
+      const tasksResponse = await axiosTasks('get', 'tasks')
+      setTasks(tasksResponse);
+    } catch (error) {
+      console.log(error);
+    }
   }
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -61,14 +62,14 @@ export default function MainPage() {
             <h1>Revisão</h1>
             <h1>Finalizados</h1>
           </div>
-          <button
+          {(userRole === 'admin') && (<button
             onClick={handleClick}
             disabled={isCardEdit || (isModalOpen && !isCardAdd)}
             type="button"
             className="bg-green-500 disabled:bg-green-700 disabled:opacity-80 hover:bg-green-700 absolute right-2 top-[5.5rem] text-white font-bold py-1 px-6 rounded"
           >
             <Plus size={25} />
-          </button>
+          </button>)}
         </div>
         <div className="board-container border-2 bg-transparent bg-no-repeat bg-cover border-green-300 gap-2 rounded py-2 overflow-auto  flex justify-around w-[90vw] h-[32em]">
           <Board data={tasks} />

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { INITIAL_STATE_CARD as INITIAL_STATE_NEW_CARD } from '../context/CardContextProvider';
 import useAxios from '../hooks/useAxios';
 import useCardContext from '../hooks/useCardContext';
+import useUserContext from '../hooks/useUserContext';
 import ModalButtonsContainer from './ModalButtonsContainer';
 import ModalStatusContainer from './ModalStatusContainer';
 import RightModalContainer from './RightModalContainer';
@@ -32,6 +33,7 @@ export default function BoardCardModal() {
     priority,
     status,
   });
+  const { userRole } = useUserContext()
   const { axiosTasks } = useAxios()
   function handleChange(e: any) {
     const { name, value } = e.target;
@@ -61,7 +63,7 @@ export default function BoardCardModal() {
         modalCardInfos={modalCardInfos}
       />
 
-      {isCardEdit || isCardAdd ? (
+      {(userRole === 'admin' && (isCardEdit || isCardAdd)) ? (
         <input
           onChange={handleChange}
           name="title"
@@ -74,7 +76,7 @@ export default function BoardCardModal() {
         </h1>
       )}
       <div className=" px-2 flex gap-2 h-[20rem]">
-        {isCardEdit || isCardAdd ? (
+        {(userRole === 'admin' && (isCardEdit || isCardAdd)) ? (
           <textarea
             onChange={handleChange}
             name="description"
