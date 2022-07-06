@@ -1,21 +1,22 @@
 import { useState } from 'react';
 
 import { INITIAL_STATE_CARD as INITIAL_STATE_NEW_CARD } from '../context/CardContextProvider';
-import useAxios from '../hooks/useAxios';
 import useCardContext from '../hooks/useCardContext';
 import useUserContext from '../hooks/useUserContext';
+import AlertModal from './AlertModal';
 import ModalButtonsContainer from './ModalButtonsContainer';
 import ModalStatusContainer from './ModalStatusContainer';
 import RightModalContainer from './RightModalContainer';
 
+const ERROR_UPDATE_OR_ADD_CARD = {
+  title: 'Erro ao tentar adicionar ou editar cartão!',
+  paragraph: 'Erro ao tentar adicionar ou editar o cartão no banco de dados.',
+}
 export default function BoardCardModal() {
   const {
     modalCardInfos,
     isCardEdit,
     isCardAdd,
-    setIsModalOpen,
-    setTasks,
-    tasks,
   } = useCardContext();
   const {
     createdAt,
@@ -33,24 +34,16 @@ export default function BoardCardModal() {
     priority,
     status,
   });
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+
   const { userRole } = useUserContext()
-  const { axiosTasks } = useAxios()
   function handleChange(e: any) {
     const { name, value } = e.target;
     isCardAdd
       ? setCardToAdd({ ...cardToAdd, [name]: value })
       : setCardUpdate({ ...cardUpdate, [name]: value });
   }
-  async function handleDeleteCard() {
-    setTasks(tasks.filter((task) => task.id !== modalCardInfos.id));
-    const id = modalCardInfos.id as string;
-    try {
-      await axiosTasks('delete', 'tasks', { id })
-      setIsModalOpen(false);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
 
   return (
     <div
@@ -92,12 +85,16 @@ export default function BoardCardModal() {
           createdAt={!isCardAdd ? createdAt : cardToAdd.createdAt}
           members={!isCardAdd ? members : cardToAdd.members}
           createdBy={!isCardAdd ? createdBy : cardToAdd.createdBy}
-          handleDeleteCard={handleDeleteCard}
         />
       </div>
       <ModalButtonsContainer
+        setIsAlertModalOpen={setIsAlertModalOpen}
         data={isCardAdd ? { ...cardToAdd } : { ...cardUpdate }}
       />
+      <AlertModal
+        isAlertModalOpen={isAlertModalOpen}
+        setIsAlertModalOpen={setIsAlertModalOpen}
+        modalInfos={ERROR_UPDATE_OR_ADD_CARD} />
     </div>
   );
 }

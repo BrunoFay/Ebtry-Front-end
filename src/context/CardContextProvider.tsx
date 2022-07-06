@@ -10,7 +10,7 @@ export const INITIAL_STATE_CARD = {
   priority: Priority.LOW,
   members: [],
   createdAt: new Date(Date.now()),
-  createdBy: '',
+  createdBy: 'Admin',
 };
 export default function CardContextProvider(props: { children: ReactNode }) {
   const [isModalOpen, setIsModalOpen] = useState(false);

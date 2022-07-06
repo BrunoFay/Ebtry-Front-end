@@ -1,6 +1,7 @@
-import { Plus, SignOut } from 'phosphor-react';
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Plus, SignOut, X } from 'phosphor-react';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import AlertModal from '../components/AlertModal';
 
 import Board from '../components/Board';
 import FrameCardModal from '../components/BoardCardModal';
@@ -8,6 +9,10 @@ import useAxios from '../hooks/useAxios';
 import useCardContext from '../hooks/useCardContext';
 import useUserContext from '../hooks/useUserContext';
 
+const ERROR_ADD_TASKS_TO_BOARD = {
+  title: 'Erro ao Fazer requisição!',
+  paragraph: 'Erro ao tentar adicionar tarefas ao quadro!',
+}
 export default function MainPage() {
   const {
     isModalOpen,
@@ -19,7 +24,9 @@ export default function MainPage() {
     setIsModalOpen,
   } = useCardContext();
   const { axiosTasks } = useAxios();
-  const { userRole } = useUserContext();
+  const { userRole, setUserRole } = useUserContext();
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const navegate = useNavigate();
   async function fetchTasks() {
     try {
       const tasksResponse = await axiosTasks('get', 'tasks')
@@ -30,6 +37,11 @@ export default function MainPage() {
   }
 
   useEffect(() => {
+    const userFromSessionStorage = sessionStorage.getItem('userRole') as string
+    setUserRole(userFromSessionStorage)
+    if (!userFromSessionStorage) {
+      navegate('/')
+    }
     fetchTasks();
   }, []);
   function handleClick() {
@@ -39,9 +51,9 @@ export default function MainPage() {
 
   return (
     <div className="bg-wolfBG">
-      <header className="flex justify-between bg-purple-900 p-3 items-center">
-        <div className="logo-container flex gap-1  text-green-500">
-          <span className='text-5xl text-["Poppins"] font-extrabold logoMain'>
+      <header className="flex justify-between bg-black border-b-2 bo p-3 items-center">
+        <div className="logo-container flex gap-1  text-zinc-300">
+          <span className='text-5xl first-letter:text-green-500 text-["Poppins"] font-extrabold logoMain'>
             Ebtry
           </span>
         </div>
@@ -62,14 +74,16 @@ export default function MainPage() {
             <h1>Revisão</h1>
             <h1>Finalizados</h1>
           </div>
-          {(userRole === 'admin') && (<button
-            onClick={handleClick}
-            disabled={isCardEdit || (isModalOpen && !isCardAdd)}
-            type="button"
-            className="bg-green-500 disabled:bg-green-700 disabled:opacity-80 hover:bg-green-700 absolute right-2 top-[5.5rem] text-white font-bold py-1 px-6 rounded"
-          >
-            <Plus size={25} />
-          </button>)}
+          {(userRole === 'admin') && (
+            <button
+              onClick={handleClick}
+              disabled={isCardEdit || (isModalOpen && !isCardAdd)}
+              type="button"
+              className={`${isCardAdd ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700'}  disabled:bg-green-700 disabled:opacity-80  absolute right-2 top-[5.5rem] text-white font-bold py-1 px-6 rounded`}
+            >
+              {!isCardAdd ? (<Plus size={25} />) : <X size={25} />}
+            </button>
+          )}
         </div>
         <div className="board-container border-2 bg-transparent bg-no-repeat bg-cover border-green-300 gap-2 rounded py-2 overflow-auto  flex justify-around w-[90vw] h-[32em]">
           <Board data={tasks} />
@@ -83,6 +97,10 @@ export default function MainPage() {
           <span> Trybe 2022</span>
         </div>
       </footer>
+      <AlertModal
+        isAlertModalOpen={isAlertModalOpen}
+        setIsAlertModalOpen={setIsAlertModalOpen}
+        modalInfos={ERROR_ADD_TASKS_TO_BOARD} />
     </div>
   );
 }

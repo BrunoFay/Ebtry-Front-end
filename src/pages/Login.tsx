@@ -1,11 +1,18 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AlertModal from '../components/AlertModal';
 
 import useAxios from '../hooks/useAxios';
 import useUserContext from '../hooks/useUserContext';
 
+const LOGIN_ALERT_MODAL = {
+  title: 'Erro ao tentar Logar!',
+  paragraph: 'Verifique seu Email e Senha e tente novamente.',
+}
+
 export default function Login() {
   const [login, setLogin] = useState({ email: '', password: '' });
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const navegate = useNavigate();
   const { axiosLogin } = useAxios();
   const { setUserRole } = useUserContext();
@@ -15,10 +22,11 @@ export default function Login() {
       const response = await axiosLogin('login', login);
       if (response.data) {
         setUserRole(response.data.role);
+        sessionStorage.setItem('userRole', response.data.role);
         navegate('/project');
       }
     } catch (error) {
-      alert('login error');
+      setIsAlertModalOpen(true);
     }
   }
   return (
@@ -58,6 +66,10 @@ export default function Login() {
               Entrar
             </button>
           </form>
+          <AlertModal
+            isAlertModalOpen={isAlertModalOpen}
+            setIsAlertModalOpen={setIsAlertModalOpen}
+            modalInfos={LOGIN_ALERT_MODAL} />
 
           <span className=" text-sm font-bold justify-center self-center text-zinc-400">
             Direitos autorais: Bruno Fay

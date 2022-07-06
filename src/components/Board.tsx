@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import useCardContext from '../hooks/useCardContext';
+import usePrevious from '../hooks/usePrevious';
 import { Api, StatusBoard } from '../types/api';
 import BoardColum from './BoardColum';
 
@@ -28,10 +29,11 @@ export default function Board(props: { data: Api[] }) {
       taskArrayLength: data.length,
     });
   }
+  const prevCardEditState = usePrevious(isCardEdit)
   useEffect(() => {
-    if (props.data.length !== statusBoard.taskArrayLength) {
-      handleSetStatusBoard();
-    }
+    if (props.data.length !== statusBoard.taskArrayLength ||
+      prevCardEditState !== isCardEdit) handleSetStatusBoard();
+
   }, [props.data, statusBoard, isCardEdit]);
 
   return (
