@@ -45,9 +45,14 @@ export default function BoardCardModal() {
 
   async function handleDeleteCard() {
     setTasks(tasks.filter((task) => task.id !== modalCardInfos.id));
-    const cardId = modalCardInfos.id as Partial<Api>;
-    await axiosTasks('delete', 'tasks', cardId)
-    setIsModalOpen(!isModalOpen);
+    const id = modalCardInfos.id as string;
+
+    try {
+      await axiosTasks('delete', 'tasks', { id })
+      setIsModalOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <div

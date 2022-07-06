@@ -36,6 +36,7 @@ export default function useAxios() {
     if (method === 'delete') {
       response = await axios.delete(
         `${import.meta.env.VITE_API_URL}/${route}/${payload!.id}`,
+        { headers }
       );
       return response;
     }
