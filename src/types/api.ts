@@ -12,11 +12,11 @@ export enum Priority {
   HIGH = 'high',
 }
 export type UserLogin = {
-  email: string,
-  password: string,
-}
+  email: string;
+  password: string;
+};
 export type Api = {
-  id?: string
+  id?: string;
   title: string;
   description: string;
   createdAt: Date;
@@ -24,7 +24,7 @@ export type Api = {
   members: string[];
   createdBy: string;
   priority: Priority;
-}
+};
 export type StatusBoard = {
   [TaskStatus.TO_DO]: Api[];
   [TaskStatus.IN_PROGRESS]: Api[];
@@ -32,4 +32,4 @@ export type StatusBoard = {
   [TaskStatus.REVIEW]: Api[];
   [TaskStatus.TESTS]: Api[];
   taskArrayLength: number;
-}
+};

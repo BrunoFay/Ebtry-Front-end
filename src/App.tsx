@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
+
 import Login from './pages/Login';
 import MainPage from './pages/MainPage';
-function App() {
 
+function App() {
   return (
     <Routes>
-      <Route path='/' element={<Login />} />
-      <Route path='/project' element={<MainPage />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/project" element={<MainPage />} />
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;

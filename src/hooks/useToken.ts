@@ -1,17 +1,16 @@
-import React from 'react'
+import React from 'react';
 
 export default function useToken() {
-  const getTokenFromLocalStore = localStorage.getItem('token')
+  const getTokenFromLocalStore = localStorage.getItem('token');
   function removeTokenOfLocalStorage() {
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
   }
   function setTokenToLocalStorage(token: string) {
-    localStorage.setItem('token', token)
+    localStorage.setItem('token', token);
   }
   return {
     getTokenFromLocalStore,
     removeTokenOfLocalStorage,
-    setTokenToLocalStorage
-  }
-
+    setTokenToLocalStorage,
+  };
 }

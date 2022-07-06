@@ -1,42 +1,40 @@
-import { FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import useAxios from '../hooks/useAxios'
+import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import useAxios from '../hooks/useAxios';
 
 export default function Login() {
-  const [login, setLogin] = useState({ email: '', password: '' })
-  const navegate = useNavigate()
-  const { axiosLogin } = useAxios()
+  const [login, setLogin] = useState({ email: '', password: '' });
+  const navegate = useNavigate();
+  const { axiosLogin } = useAxios();
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+    event.preventDefault();
     try {
-      const response = await axiosLogin('login', login)
-      response.data && navegate('/project')
-
+      const response = await axiosLogin('login', login);
+      response.data && navegate('/project');
     } catch (error) {
-      alert('login error')
+      alert('login error');
     }
-
   }
   return (
-    <div className='box-border flex overflow-hidden'>
-      <div className='w-[50%] min-h-screen bg-loginBG ' />
-      <div className='w-[50%] flex flex-col box-border bg-zinc-200'>
-        <div className='min-h-screen gap-20 flex flex-col'>
-          <div className='logo-container flex gap-1 relative top-5 left-4 text-green-500'>
-            <h1 className='text-6xl font-extrabold logoMain'>
-              Ebtry
-            </h1>
+    <div className="box-border flex overflow-hidden">
+      <div className="w-[50%] min-h-screen bg-loginBG " />
+      <div className="w-[50%] flex flex-col box-border bg-zinc-200">
+        <div className="min-h-screen gap-20 flex flex-col">
+          <div className="logo-container flex gap-1 relative top-5 left-4 text-green-500">
+            <h1 className="text-6xl font-extrabold logoMain">Ebtry</h1>
           </div>
           <form
             onSubmit={handleSubmit}
-            className='flex items-center justify-center rounded px-10 self-center flex-col  h-96 w-[450px] gap-10'>
+            className="flex items-center justify-center rounded px-10 self-center flex-col  h-96 w-[450px] gap-10"
+          >
             <input
               type="email"
               name="email"
               onChange={(e) => setLogin({ ...login, email: e.target.value })}
               value={login.email}
-              placeholder='Email'
-              className='w-full h-10 rounded-lg outline-none ring-slate-400 ring-2 focus:ring-green-500 px-2'
+              placeholder="Email"
+              className="w-full h-10 rounded-lg outline-none ring-slate-400 ring-2 focus:ring-green-500 px-2"
             />
 
             <input
@@ -44,23 +42,23 @@ export default function Login() {
               name="password"
               onChange={(e) => setLogin({ ...login, password: e.target.value })}
               value={login.password}
-              placeholder='Password'
-              className='w-full h-10 rounded-lg outline-none ring-slate-400 ring-2 focus:ring-green-500 px-2'
+              placeholder="Password"
+              className="w-full h-10 rounded-lg outline-none ring-slate-400 ring-2 focus:ring-green-500 px-2"
             />
             <button
               disabled={!login.email || !login.password}
-              type='submit'
-              className='h-10 disabled:ring-transparent disabled:border-0 disabled:bg-green-700 disabled:opacity-50 rounded-lg focus:border-2 transition-all hover:border-2 hover:ring-green-500 ring-transparent outline-none ring-2 focus:ring-green-500 bg-green-500 hover:bg-green-700 text-white font-bold px-4'
+              type="submit"
+              className="h-10 disabled:ring-transparent disabled:border-0 disabled:bg-green-700 disabled:opacity-50 rounded-lg focus:border-2 transition-all hover:border-2 hover:ring-green-500 ring-transparent outline-none ring-2 focus:ring-green-500 bg-green-500 hover:bg-green-700 text-white font-bold px-4"
             >
               Entrar
             </button>
           </form>
 
-          <span className=' text-sm font-bold justify-center self-center text-zinc-400' >
+          <span className=" text-sm font-bold justify-center self-center text-zinc-400">
             Direitos autorais: Bruno Fay
           </span>
         </div>
       </div>
     </div>
-  )
+  );
 }

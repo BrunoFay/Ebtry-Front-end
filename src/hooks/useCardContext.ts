@@ -1,5 +1,6 @@
-import React, { useContext } from 'react'
-import { CardContex, cardContext } from '../context/cardContext'
+import React, { useContext } from 'react';
+
+import { CardContext, cardContext } from '../context/cardContext';
 
 export default function useCardContext() {
   const {
@@ -12,7 +13,8 @@ export default function useCardContext() {
     isCardEdit,
     setIsCardEdit,
     tasks,
-    setTasks } = useContext(cardContext) as CardContex
+    setTasks,
+  } = useContext(cardContext) as CardContext;
   return {
     isModalOpen,
     setIsModalOpen,
@@ -23,6 +25,6 @@ export default function useCardContext() {
     isCardEdit,
     setIsCardEdit,
     tasks,
-    setTasks
-  }
+    setTasks,
+  };
 }

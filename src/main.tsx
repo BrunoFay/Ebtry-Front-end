@@ -1,9 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import App from './App'
-import CardContextProvider from './context/CardContextProvider'
-import './global.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+
+import App from './App';
+import CardContextProvider from './context/CardContextProvider';
+import './global.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -12,5 +13,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <App />
       </CardContextProvider>
     </BrowserRouter>
-  </React.StrictMode>
-)
+  </React.StrictMode>,
+);
