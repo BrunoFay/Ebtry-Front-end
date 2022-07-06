@@ -54,6 +54,7 @@ export default function ModalButtonsContainer(cardData: {
     setIsCardEdit(false);
     setIsModalOpen(false);
   }
+  
   return (
     <button
       disabled={isCardAdd && newCard.title?.length! < 3}

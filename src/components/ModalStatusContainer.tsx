@@ -30,6 +30,7 @@ export default function ModalStatusContainer({
   }
   const isStatusPaused = modalCardInfos.status === 'paused' ? 'text-[#2f3640] text-xl' : '';
   const setPriorityColor = modalCardInfos.status === 'paused' ? 'bg-black' : `${priority}-bgPriority`;
+  
   return (
     <div className="flex flex-col items-center justify-center">
       <div className={`${setPriorityColor} w-full h-10 rounded`} />

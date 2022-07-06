@@ -16,7 +16,7 @@ export default function Board(props: { data: Api[] }) {
   const [statusBoard, setStatusBoard] = useState<StatusBoard>(
     INITIAL_STATE_STATUS_BOARD_OBJ,
   );
-  const { setIsCardEdit, isCardEdit } = useCardContext();
+  const { isCardEdit } = useCardContext();
   function handleSetStatusBoard() {
     const { data } = props;
     setStatusBoard({

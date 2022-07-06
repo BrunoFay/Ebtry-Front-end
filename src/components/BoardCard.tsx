@@ -11,7 +11,6 @@ export default function BoardCard(props: { cardInfos: Api }) {
     isCardAdd,
     isCardEdit,
   } = useCardContext();
-
   function handleSetModalCardInfos() {
     setModalCardInfos(props.cardInfos);
     setIsModalOpen(!isModalOpen);

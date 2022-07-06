@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { INITIAL_STATE_CARD as INITIAL_STATE_NEW_CARD } from '../context/CardContextProvider';
 import useAxios from '../hooks/useAxios';
 import useCardContext from '../hooks/useCardContext';
-import { Api } from '../types/api';
 import ModalButtonsContainer from './ModalButtonsContainer';
 import ModalStatusContainer from './ModalStatusContainer';
 import RightModalContainer from './RightModalContainer';
@@ -14,7 +13,6 @@ export default function BoardCardModal() {
     isCardEdit,
     isCardAdd,
     setIsModalOpen,
-    isModalOpen,
     setTasks,
     tasks,
   } = useCardContext();
@@ -28,7 +26,6 @@ export default function BoardCardModal() {
     title,
   } = modalCardInfos;
   const [cardToAdd, setCardToAdd] = useState(INITIAL_STATE_NEW_CARD);
-
   const [cardUpdate, setCardUpdate] = useState({
     title,
     description,
@@ -42,11 +39,9 @@ export default function BoardCardModal() {
       ? setCardToAdd({ ...cardToAdd, [name]: value })
       : setCardUpdate({ ...cardUpdate, [name]: value });
   }
-
   async function handleDeleteCard() {
     setTasks(tasks.filter((task) => task.id !== modalCardInfos.id));
     const id = modalCardInfos.id as string;
-
     try {
       await axiosTasks('delete', 'tasks', { id })
       setIsModalOpen(false);
@@ -54,6 +49,7 @@ export default function BoardCardModal() {
       console.log(error);
     }
   }
+
   return (
     <div
       tabIndex={1}

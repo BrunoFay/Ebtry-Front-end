@@ -6,7 +6,6 @@ import useToken from './useToken';
 
 export default function useAxios() {
   const { setTokenToLocalStorage, getTokenFromLocalStore } = useToken();
-  const [isRequestOkay, setIsRequestOkay] = useState(false);
   let response: any;
 
   async function axiosLogin(route: string, payload: UserLogin) {
