@@ -45,6 +45,7 @@ export default function BoardCardModal() {
   }
 
 
+
   return (
     <div
       tabIndex={1}
@@ -89,7 +90,7 @@ export default function BoardCardModal() {
       </div>
       <ModalButtonsContainer
         setIsAlertModalOpen={setIsAlertModalOpen}
-        data={isCardAdd ? { ...cardToAdd } : { ...cardUpdate }}
+        cardData={isCardAdd ? cardToAdd : cardUpdate }
       />
       <AlertModal
         isAlertModalOpen={isAlertModalOpen}

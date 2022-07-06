@@ -40,6 +40,14 @@ export default function useAxios() {
       return response;
     }
     else if (method === 'post' || method === 'patch') {
+      const payloadWithoutId = {
+        createdAt:payload?.createdAt,
+        createdBy:payload?.createdBy,
+        description:payload?.description,
+        priority:payload?.priority,
+        status:payload?.status,
+        title:payload?.title,
+      };
       method === 'post'
         ? (response = await axios.post(
           `${import.meta.env.VITE_API_URL}/${route}`,
@@ -48,7 +56,7 @@ export default function useAxios() {
         ))
         : (response = await axios.patch(
           `${import.meta.env.VITE_API_URL}/${route}/${payload!.id}`,
-          payload,
+          payloadWithoutId,
           { headers },
         ));
       return response;

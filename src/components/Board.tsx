@@ -17,7 +17,7 @@ export default function Board(props: { data: Api[] }) {
   const [statusBoard, setStatusBoard] = useState<StatusBoard>(
     INITIAL_STATE_STATUS_BOARD_OBJ,
   );
-  const { isCardEdit } = useCardContext();
+  const { isCardEdit, isCardAdd } = useCardContext();
   function handleSetStatusBoard() {
     const { data } = props;
     setStatusBoard({
@@ -30,9 +30,13 @@ export default function Board(props: { data: Api[] }) {
     });
   }
   const prevCardEditState = usePrevious(isCardEdit)
+  const prevCardAddState = usePrevious(isCardAdd)
   useEffect(() => {
     if (props.data.length !== statusBoard.taskArrayLength ||
-      prevCardEditState !== isCardEdit) handleSetStatusBoard();
+      prevCardEditState !== isCardEdit ||
+      prevCardAddState !== isCardAdd) {
+      handleSetStatusBoard();
+    }
 
   }, [props.data, statusBoard, isCardEdit]);
 

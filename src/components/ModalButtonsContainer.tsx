@@ -2,9 +2,9 @@ import useAxios from '../hooks/useAxios';
 import useCardContext from '../hooks/useCardContext';
 import { Api } from '../types/api';
 
-export default function ModalButtonsContainer(
-  setIsAlertModalOpen: any,
-  cardData: { data: Partial<Api> },) {
+export default function ModalButtonsContainer({
+  setIsAlertModalOpen,
+  cardData }: any) {
   const {
     setIsModalOpen,
     isCardAdd,
@@ -15,9 +15,7 @@ export default function ModalButtonsContainer(
     setTasks,
     tasks,
   } = useCardContext();
-  const newCard = cardData.data as Api;
-  console.log(modalCardInfos);
-  
+  const newCard = cardData as Api;
   const { axiosTasks } = useAxios();
   function handleButtonName() {
     if (isCardAdd) {
@@ -30,7 +28,7 @@ export default function ModalButtonsContainer(
   }
   function handleButtonColor() {
     if (isCardAdd) {
-      return `bg-green-500 ${modalCardInfos.title?.length! > 3 && 'hover:bg-green-700'
+      return `bg-green-500 ${newCard.title?.length! > 3 && 'hover:bg-green-700'
         }`;
     }
     if (isCardEdit) {
@@ -48,30 +46,31 @@ export default function ModalButtonsContainer(
     } catch (error) {
       setIsAlertModalOpen(true);
     }
-  
-}
 
-function handleEditButton() {
-  try {
-    modalCardInfos.title = newCard.title!;
-    modalCardInfos.description = newCard.description!;
-    modalCardInfos.priority = newCard.priority!;
-    modalCardInfos.status = newCard.status!;
-    axiosTasks('patch', 'tasks', modalCardInfos);
-    setIsCardEdit(false);
-    setIsModalOpen(false);
-  } catch (error) {
-    setIsAlertModalOpen(true)
   }
-}
+console.log(modalCardInfos);
 
-return (
-  <button
-    disabled={isCardAdd && modalCardInfos.title?.length! < 3}
-    onClick={() => (!isCardAdd ? handleEditButton() : handleAddButton())}
-    className={`${handleButtonColor()} disabled:opacity-50 self-center w-28 text-white relative bottom-2 font-bold py-1 px-2 rounded`}
-  >
-    {handleButtonName()}
-  </button>
-);
+  function handleEditButton() {
+    try {
+      modalCardInfos.title = newCard.title!;
+      modalCardInfos.description = newCard.description!;
+      modalCardInfos.priority = newCard.priority!;
+      modalCardInfos.status = newCard.status!;
+      axiosTasks('patch', 'tasks', modalCardInfos);
+      setIsCardEdit(false);
+      setIsModalOpen(false);
+    } catch (error) {
+      setIsAlertModalOpen(true)
+    }
+  }
+
+  return (
+    <button
+      disabled={isCardAdd && newCard.title?.length! < 3}
+      onClick={() => (!isCardAdd ? handleEditButton() : handleAddButton())}
+      className={`${handleButtonColor()} disabled:opacity-50 self-center w-28 text-white relative bottom-2 font-bold py-1 px-2 rounded`}
+    >
+      {handleButtonName()}
+    </button>
+  );
 }
