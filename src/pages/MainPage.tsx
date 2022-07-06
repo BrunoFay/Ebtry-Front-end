@@ -51,7 +51,7 @@ export default function MainPage() {
 
   return (
     <div className="bg-wolfBG">
-      <header className="flex justify-between bg-black border-b-2 bo p-3 items-center">
+      <header className="flex justify-between bg-black border-b-2  p-3 items-center">
         <div className="logo-container flex gap-1  text-zinc-300">
           <span className='text-5xl first-letter:text-green-500 text-["Poppins"] font-extrabold logoMain'>
             Ebtry
@@ -90,7 +90,7 @@ export default function MainPage() {
         </div>
         {isModalOpen && <FrameCardModal />}
       </main>
-      <footer className="text-sm text-zinc-400 flex items-center font-bold justify-between bg-purple-900 px-5 h-10">
+      <footer className="text-sm text-zinc-400 flex items-center font-bold justify-between bg-black border-t-2 px-5 h-1 py-6">
         <span className="">Author: Bruno fay</span>
         <div className="flex gap-5">
           <span>Blitz de carreira</span>
