@@ -16,6 +16,8 @@ export default function ModalButtonsContainer(
     tasks,
   } = useCardContext();
   const newCard = cardData.data as Api;
+  console.log(modalCardInfos);
+  
   const { axiosTasks } = useAxios();
   function handleButtonName() {
     if (isCardAdd) {
@@ -28,7 +30,7 @@ export default function ModalButtonsContainer(
   }
   function handleButtonColor() {
     if (isCardAdd) {
-      return `bg-green-500 ${newCard.title?.length! > 3 && 'hover:bg-green-700'
+      return `bg-green-500 ${modalCardInfos.title?.length! > 3 && 'hover:bg-green-700'
         }`;
     }
     if (isCardEdit) {
@@ -65,7 +67,7 @@ function handleEditButton() {
 
 return (
   <button
-    disabled={isCardAdd && newCard.title?.length! < 3}
+    disabled={isCardAdd && modalCardInfos.title?.length! < 3}
     onClick={() => (!isCardAdd ? handleEditButton() : handleAddButton())}
     className={`${handleButtonColor()} disabled:opacity-50 self-center w-28 text-white relative bottom-2 font-bold py-1 px-2 rounded`}
   >
