@@ -37,9 +37,11 @@ export default function ModalButtonsContainer({
     return 'bg-red-500  hover:bg-red-700';
   }
 
-  function handleAddButton() {
+  async function handleAddButton() {
     try {
-      axiosTasks('post', 'tasks', newCard);
+      const response = await axiosTasks('post', 'tasks', newCard);
+      console.log(response);
+
       setTasks([...tasks, newCard]);
       setIsCardAdd(false);
       setIsModalOpen(false);
@@ -48,7 +50,6 @@ export default function ModalButtonsContainer({
     }
 
   }
-console.log(modalCardInfos);
 
   function handleEditButton() {
     try {
@@ -66,7 +67,7 @@ console.log(modalCardInfos);
 
   return (
     <button
-      disabled={isCardAdd && newCard.title?.length! < 3}
+      disabled={isCardAdd && (newCard.title?.length! < 3 || newCard.description?.length! < 3)}
       onClick={() => (!isCardAdd ? handleEditButton() : handleAddButton())}
       className={`${handleButtonColor()} disabled:opacity-50 self-center w-28 text-white relative bottom-2 font-bold py-1 px-2 rounded`}
     >

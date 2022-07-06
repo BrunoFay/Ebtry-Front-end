@@ -9,13 +9,15 @@ body{
 .logoMain{
   text-shadow: -0.08em 0.03em 0.12em rgba(0,0,0,0.9);
 }
-.frameStage-container:last-child{
+.boardStage-container:last-child{
   @apply border-none;
 }
-.frameCard-container::-webkit-scrollbar,.board-container::-webkit-scrollbar { 
+.boardCard-container::-webkit-scrollbar,
+.board-container::-webkit-scrollbar,
+.boardStage-container::-webkit-scrollbar { 
     display: none !important;  
 }
-.frameStage-container h1{
+.boardStage-container h1{
   @apply font-["Poppins","sans-serif"] text-xl text-zinc-700 font-bold mt-6;
 }
 
@@ -27,4 +29,8 @@ body{
 }
 .high-bgPriority{
   @apply bg-red-500;
+}
+.boardStage-container:last-child:after{
+  @apply pb-14;
+
 }

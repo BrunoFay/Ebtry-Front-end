@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import AlertModal from '../components/AlertModal';
 
 import Board from '../components/Board';
-import FrameCardModal from '../components/BoardCardModal';
+import BoardCardModal from '../components/BoardCardModal';
 import useAxios from '../hooks/useAxios';
 import useCardContext from '../hooks/useCardContext';
 import useUserContext from '../hooks/useUserContext';
@@ -88,7 +88,7 @@ export default function MainPage() {
         <div className="board-container border-2 bg-transparent bg-no-repeat bg-cover border-green-300 gap-2 rounded py-2 overflow-auto  flex justify-around w-[90vw] h-[32em]">
           <Board data={tasks} />
         </div>
-        {isModalOpen && <FrameCardModal />}
+        {isModalOpen && <BoardCardModal />}
       </main>
       <footer className="text-sm text-zinc-400 flex items-center font-bold justify-between bg-black border-t-2 px-5 h-1 py-6">
         <span className="">Author: Bruno fay</span>

@@ -38,7 +38,7 @@ export default function Board(props: { data: Api[] }) {
       handleSetStatusBoard();
     }
 
-  }, [props.data, statusBoard, isCardEdit]);
+  }, [props.data, statusBoard, isCardEdit, isCardAdd]);
 
   return (
     <>
