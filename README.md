@@ -37,7 +37,10 @@ npm i
 ```bash
 npm run dev
 ```
-
+##### Variaveis de ambiente:
+```bash
+VITE_API_URL=http://localhost:3001
+```
 ## Link para o repositorio do Back-end:
 https://github.com/BrunoFay/Ebtry-Back-end
 
@@ -64,25 +67,28 @@ the objective of a zero project fullstack application to meet the need of a comp
 
 ### *To run the project it is necessary to have Node.js installed locally!*
 
-Clone the right:
+##### Clone the right:
 ```bash
 git clone git@github.com:BrunoFay/Ebtry-Front-end.git
 ```
 
-Enter the right:
+##### Enter the right:
 ```bash
 cd Ebtry-Front-end
 ```
 
-Install as dependencies:
+##### Install as dependencies:
 ```bash
 npm i
 ```
 
-Run Front-end manually:
+##### Run Front-end manually:
 ```bash
 npm run dev
 ```
-
+##### Environment variables:
+```bash
+VITE_API_URL=http://localhost:3001
+```
 ## Link to Backend repository:
 https://github.com/BrunoFay/Ebtry-Back-end
