@@ -12,6 +12,11 @@ o objetivo do projeto era criar uma aplicação fullstack do zero para suprir a 
 - Jest
 - Axios
 
+## Proximos passos:
+- [ ] Criar a pagina para cadastrar novos usuários
+- [ ] Refatorar o código
+- [ ] Implemantar testes na pagina de atividades
+- [ ] Limpar bugs
 ## Para visualizar um video da minha versão do projeto, clique na imagem abaixo !
 
 [![Watch the video](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvX7XjW8SbO7M8RFY41EYr8WtFq9QouZ7L5A&usqp=CAU)](https://www.youtube.com/watch?v=Ahqy3R-qC5c)
@@ -60,6 +65,11 @@ the objective of a zero project fullstack application to meet the need of a comp
 - Headlessui (Accessibility)
 - Jest
 - Axios
+## Next steps:
+- [ ] Create the page to register new users
+- [ ] Refactor the code
+- [ ] Implement tests on the activity page
+- [ ] Clear bugs
 
 ## To view a video of my version of the project, click on the image below!
 
