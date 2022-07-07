@@ -11,6 +11,7 @@ o objetivo do projeto era criar uma aplicação fullstack do zero para suprir a 
 - Headlessui (Acessibilidade)
 - Jest
 - Axios
+- Context API
 
 ## Proximos passos:
 - [ ] Criar a pagina para cadastrar novos usuários
@@ -65,6 +66,7 @@ the objective of a zero project fullstack application to meet the need of a comp
 - Headlessui (Accessibility)
 - Jest
 - Axios
+- Context API
 ## Next steps:
 - [ ] Create the page to register new users
 - [ ] Refactor the code
