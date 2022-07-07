@@ -1,4 +1,4 @@
-# Ebtry Front-end
+# Ebtry Front-end [*PORTUGUESE*]
 Projeto realizado durante a semana Blitz de carreira na **[Trybe](https://www.betrybe.com/)**.
 o objetivo do projeto era criar uma aplicação fullstack do zero para suprir a necessidade de uma empresa em organizar suas tarefas e que seus funcionarios tivessem uma melhor visibilidade do progresso das mesmas.
 
@@ -47,7 +47,7 @@ https://github.com/BrunoFay/Ebtry-Back-end
 <br/>
 <hr/>
 
-# Ebtry front end
+# Ebtry front end [*ENGLISH*]
 Project carried out during Blitz career week at **[Trybe](https://www.betrybe.com/)**.
 the objective of a zero project fullstack application to meet the need of a company to organize tasks and functionalities that work in their best visibility of their progress.
 
