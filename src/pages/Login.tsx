@@ -32,9 +32,9 @@ export default function Login() {
   return (
     <div className="box-border flex overflow-hidden">
       <div className="w-[50%] min-h-screen bg-loginBG " />
-      <div className="w-[50%] flex flex-col box-border bg-zinc-300">
+      <div className="w-[50%] flex flex-col box-border bg-zinc-200">
         <div className="min-h-screen gap-20 flex flex-col">
-          <div className="logo-container flex gap-1 relative top-5 left-4 text-zinc-200">
+          <div className="logo-container flex gap-1 relative top-5 left-4 text-zinc-300">
             <h1 className="text-6xl font-extrabold logoMain first-letter:text-green-500">Ebtry</h1>
           </div>
           <form
@@ -72,7 +72,7 @@ export default function Login() {
             modalInfos={LOGIN_ALERT_MODAL} />
 
           <span className=" text-sm font-bold justify-center self-center text-zinc-400">
-            Direitos autorais: Bruno Fay
+            Bruno Fay - Blitz de carreira - 2022
           </span>
         </div>
       </div>
